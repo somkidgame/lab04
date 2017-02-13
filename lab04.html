@@ -3,10 +3,20 @@
 <head>
     <title>Bootstrap Example</title>
     <meta charset="utf-8">
+    <style type="text/css">
+        body,
+        a:hover {
+            cursor: url(http://cur.cursors-4u.net/games/gam-10/gam986.cur), progress !important;
+        }
+    </style>
+    <a href="http://www.cursors-4u.com/cursor/2009/06/02/dragonica-fuchsia-star-glove-pointer.html" target="_blank" title="Dragonica Fuchsia Star Glove Pointer"><img src="http://cur.cursors-4u.net/cursor.png" border="0" alt="Dragonica Fuchsia Star Glove Pointer" style="position:absolute; top: 0px; right: 0px;" /></a>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
     <style>
         /* Remove the navbar's default margin-bottom and rounded borders */
         
@@ -23,8 +33,8 @@
         
         .sidenav {
             padding-top: 20px;
-            background-color: #f1f1f1;
-            height: 100%;
+            background-color: lightblue;
+            height: 1503%;
         }
         /* Set black background color, white text and some padding */
         
@@ -44,10 +54,154 @@
                 height: auto;
             }
         }
+        
+        table {
+            background: lemonchiffon
+        }
+        
+        table,
+        th,
+        td {
+            text-align: center;
+        }
+        
+        .txt {
+            text-align: left;
+        }
+        
+        a:link {
+            color: red;
+        }
+        
+        a:visited {
+            color: blue;
+        }
+        
+        li a {
+            align-content: center;
+            color: yellow;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        
+        body {
+            background: peachpuff
+        }
+        
+        .black-ribbon {
+            position: fixed;
+            z-index: 9999;
+            width: 70px;
+        }
+        
+        @media only all and (min-width: 768px) {
+            .black-ribbon {
+                width: auto;
+            }
+        }
+        
+        .stick-left {
+            left: 0;
+        }
+        
+        .stick-right {
+            right: 0;
+        }
+        
+        .stick-top {
+            top: 0;
+        }
+        
+        .stick-bottom {
+            bottom: 0;
+        }
     </style>
 </head>
 
 <body>
+    <img src="https://goo.gl/YxzDaS" class="black-ribbon stick-bottom stick-left" />
+    <img src="https://goo.gl/NsuiKq" class="black-ribbon stick-bottom stick-right" />
+
+    <script>
+        //Here you can add your own picture for snow. Just change the url
+        var snowsrc = "http://i13.servimg.com/u/f13/11/52/70/02/snowba10.png"
+            //how many snowflakes there will be (currently 12)
+        var no = 47;
+        //How fast will the snow disappear (0 is never)
+        var hidesnowtime = 0;
+        //The height the snow will reach before it disappears ("windowheight" or "pageheight")
+        var snowdistance = "pageheight";
+        ///////////////////////////////End of Settings///////////////////////////////////
+        var ie4up = (document.all) ? 1 : 0;
+        var ns6up = (document.getElementById && !document.all) ? 1 : 0;
+
+        function iecompattest() {
+            return (document.compatMode && document.compatMode != "BackCompat") ? document.documentElement : document.body
+        }
+        var dx, xp, yp;
+        var am, stx, sty;
+        var i, doc_width = 800,
+            doc_height = 600;
+        if (ns6up) {
+            doc_width = self.innerWidth;
+            doc_height = self.innerHeight;
+        } else
+        if (ie4up) {
+            doc_width = document.body.clientWidth;
+            doc_height = document.body.clientHeight;
+        }
+        dx = new Array();
+        xp = new Array();
+        yp = new Array();
+        am = new Array();
+        stx = new Array();
+        sty = new Array();
+        for (i = 0; i < no; ++i) {
+            dx[i] = 0;
+            xp[i] = Math.random() * (doc_width - 50);
+            yp[i] = Math.random() * doc_height;
+            am[i] = Math.random() * 20;
+            stx[i] = 0.02 + Math.random() / 10;
+            sty[i] = 0.7 + Math.random();
+            if (ie4up || ns6up) {
+                if (i == 0) {
+                    document.write("<div id=\"dot" + i + "\" style=\"POSITION: absolute; Z-INDEX: " + i + "; VISIBILITY: visible; TOP: 15px; LEFT: 15px;\"><a href=\"http://rftactical.darkbb.com/index.htm\"><img src='" + snowsrc + "' border=\"0\"><\/a><\/div>");
+                } else {
+                    document.write("<div id=\"dot" + i + "\" style=\"POSITION: absolute; Z-INDEX: " + i + "; VISIBILITY: visible; TOP: 15px; LEFT: 15px;\"><img src='" + snowsrc + "' border=\"0\"><\/div>");
+                }
+            }
+        }
+
+        function snowIE_NS6() {
+            doc_width = ns6up ? window.innerWidth - 10 : iecompattest().clientWidth - 10;
+            doc_height = (window.innerHeight && snowdistance == "windowheight") ? window.innerHeight : (ie4up && snowdistance == "windowheight") ? iecompattest().clientHeight : (ie4up && !window.opera && snowdistance == "pageheight") ? iecompattest().scrollHeight : iecompattest().offsetHeight;
+            for (i = 0; i < no; ++i) {
+                yp[i] += sty[i];
+                if (yp[i] > doc_height - 50) {
+                    xp[i] = Math.random() * (doc_width - am[i] - 30);
+                    yp[i] = 0;
+                    stx[i] = 0.02 + Math.random() / 10;
+                    sty[i] = 0.7 + Math.random();
+                }
+                dx[i] += stx[i];
+                document.getElementById("dot" + i).style.top = yp[i] + "px";
+                document.getElementById("dot" + i).style.left = xp[i] + am[i] * Math.sin(dx[i]) + "px";
+            }
+            snowtimer = setTimeout("snowIE_NS6()", 10);
+        }
+
+        function hidesnow() {
+            if (window.snowtimer) clearTimeout(snowtimer)
+            for (i = 0; i < no; i++) document.getElementById("dot" + i).style.visibility = "hidden"
+        }
+
+        if (ie4up || ns6up) {
+            snowIE_NS6();
+            if (hidesnowtime > 0)
+                setTimeout("hidesnow()", hidesnowtime * 1000)
+        }
+    </script>
 
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
@@ -57,17 +211,16 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>                        
       </button>
-                <a class="navbar-brand" href="#">Logo</a>
+                <a class="navbar-brand" href="http://angsila.cs.buu.ac.th/~58160038/887371/lab01/aboutme.html">SOMKID HOMHUAL</a>
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="#">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Projects</a></li>
-                    <li><a href="#">Contact</a></li>
+                    <li><a href="http://angsila.cs.buu.ac.th/~58160038/887371/lab03/lab03.html">Bootstrap</a></li>
+                    <li><a href="http://line.me/ti/p/dzMgJVYqPA">Contact</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                    <li><a href="https://www.facebook.com/somkid.23071996"><i class="fa fa-facebook"></i> &nbsp;My facebook</a></li>
                 </ul>
             </div>
         </div>
@@ -76,32 +229,362 @@
     <div class="container-fluid text-center">
         <div class="row content">
             <div class="col-sm-2 sidenav">
-                <p><a href="#">Link</a></p>
-                <p><a href="#">Link</a></p>
-                <p><a href="#">Link</a></p>
+                <p><a href="#JS01">JS01</a></p>
+                <p><a href="#JS02">JS02</a></p>
+                <p><a href="#JS03">JS03</a></p>
+                <p><a href="#JS04">JS04</a></p>
+                <p><a href="#JS05">JS05</a></p><br><br>
+
+                <embed src="http://www.clocklink.com/clocks/5005-black.swf?TimeZone=ICT&" width="240" height="80" wmode="transparent" type="application/x-shockwave-flash">
+                <BR>
+                <BR>
+
             </div>
             <div class="col-sm-8 text-left">
-                <h1>Welcome</h1>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur
-                    sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                    exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+
+                <h1 id="JS01">JS01</h1>
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th><a href="http://angsila.cs.buu.ac.th/~58160038/887371/lab04/js01.html">js01.html</a></th>
+                            <th>คำอธิบาย</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><img src="img/js1.jpg" width="600" height="400"></td>
+                            <td class="txt">บรรทัดที่ 10 : comment<br>บรรทัดที่ 11 : พิมพ์ข้อความ Last update on แล้วก็วันเวลาที่เข้ามาแก้ไข</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">ผลรัน<br><br>
+                                <script language="Javascript">
+                                    <!-- hide from old browsers by embedding in a comment
+                                    document.write("Last updated on " + document.lastModified)
+                                        // end script hidding
+                                </script>
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
                 <hr>
-                <h3>Test</h3>
-                <p>Lorem ipsum...</p>
+                <h1 id="JS02">JS02</h1>
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th><a href="http://angsila.cs.buu.ac.th/~58160038/887371/lab04/js02.html">js02.html</a></th>
+                            <th>คำอธิบาย</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><img src="img/js2.jpg" width="600" height="400"></td>
+                            <td class="txt">บรรทัดที่ 10 : พิมพ์ข้อความ &lt;h1&gt;Factoria Tablel&lt;/h1&gt;<br>บรรทัดที่ 11 : วนลูปเป็นจำนวน 9 รอบ โดยที่ i มีค่าเท่ากับ 1 fact มีค่าเท่ากับ 1 และกำหนดค่า fact = fact * i
+                                <br>บรรทัดที่ 12 : พิมพ์ค่าของตัวแปร i ต่อด้วย != และค่าของตัวแปร fact <br>บรรทัดที่ 13 : พิมพ์คำสั่งขึ้นบรรทัดใหม่</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">ผลรัน<br><br>
+                                <script language="Javascript">
+                                    document.write("<h1>Factorial Table</h1>");
+                                    for (i = 1, fact = 1; i < 10; i++, fact = fact * i) {
+                                        document.write(i + "! = " + fact);
+                                        document.write("<br>");
+                                    }
+                                </script>
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <hr>
+                <h1 id="JS03">JS03</h1>
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th><a href="http://angsila.cs.buu.ac.th/~58160038/887371/lab04/js03.html">js03.html</a></th>
+                            <th>คำอธิบาย</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><img src="img/js3.jpg" width="600" height="400"></td>
+                            <td class="txt">บรรทัดที่ 10 : สร้างปุ่มข้อความว่า Click me และเมื่อกดเข้าไป จะมี Pop up ขึ้นโชว์ข้อความว่า You clicked me</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">ผลรัน<br><br>
+                                <form>
+                                    <input type="button" value="Click me" onclick="alert('You clicked me')">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <hr>
+                <h1 id="JS04">JS04</h1>
+                <script language=Javascript>
+                    function outputdate() {
+                        var d = new Date();
+                        document.write(d.toLocaleString());
+                    }
+                </script>
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th><a href="http://angsila.cs.buu.ac.th/~58160038/887371/lab04/js04.html">js04.html</a></th>
+                            <th>คำอธิบาย</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><img src="img/js4.jpg" width="600" height="400"></td>
+                            <td class="txt">บรรทัดที่ 7 : สร้างฟังก์ชั่น outputdate()<br>บรรทัดที่ 8 : สร้างตัวแปร d <br> บรรทัดที่ 9 : พิมพ์ค่าของตัวแปร d เป็นสตริงโดยพิมพ์ตามวันและเวลาของคอมพิวเตอร์<br>บรรทัดที่ 17 : เรียกใช้ฟังก์ชั่น outputdate()</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">ผลรัน<br><br>
+                                <script language=Javascript>
+                                    outputdate();
+                                </script>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <hr>
+                <h1 id="JS05">JS05</h1>
+                <script language=Javascript>
+                    function alertUser() {
+                        alert("An alert box contains an exclamation mark");
+                    }
+
+                    function confirmUser() {
+                        var msg = "\n please confirm that you want\n" +
+                            "to test another button?";
+                        if (confirm(msg))
+                            document.write("<h2>You selected OK</h2>");
+                        else
+                            document.write("<h2>You selected Cancle</h2>");
+                    }
+
+                    function promptUser() {
+                        name1 = prompt("What is your name?", " ")
+                        document.write("<h2>welcome to this page " + name1 + "</h2>")
+                    }
+                </script>
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th><a href="http://angsila.cs.buu.ac.th/~58160038/887371/lab04/js05.html">js05.html</a></th>
+                            <th>คำอธิบาย</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><img src="img/js5.jpg" width="600" height="400"></td>
+                            <td class="txt">บรรทัดที่ 6 : ประกาศฟังก์ชั่น alertUser()<br>บรรทัดที่ 7 : แสดง Pop Up ว่า An alert box contains an exclamation mark
+                                <br>บรรทัดที่ 9 : ประกาศฟังก์ชั่น confirmUser()<br>บรรทัดที่ 10-11 : สร้างตัวแปร msg เก็บข้อความ please confirm that you want to test another button?
+                                <br>บรรทัดที่ 12 : ถ้าตกลง <br> บรรทัด 13 : พิมพ์ข้อความ You selected OK <br>บรรทัดที่ 14 : ไม่ใช่ <br>บรรทัดที่ 15 : พิมพ์ข้อความ You selected Cancle
+                                <br>บรรทัดที่ 17 : ปรักาศฟังก์ชั่น promptUser()<br>บรรทัดที่ 18 ให้ตัวแปรเก็บค่าคำตอบจาก Pop Up ที่ถามว่า What is your name? <br>บรรทัดที่ 18 : พิมพ์ข้อความ welcome to this ตามด้วยตัวแปร name1 </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">ผลรัน<br><br>
+                                <form>
+                                    <input type=button value="Click here to test alert()" onclick="alertUser()"><br>
+                                    <input type=button value="Click here to test confirm()" onclick="confirmUser()"><br>
+                                    <input type=button value="Click here to test prompt()" onclick="promptUser()"><br>
+                                </form>
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <hr>
+                <h1 id="JS06">JS06</h1>
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th><a href="http://angsila.cs.buu.ac.th/~58160038/887371/lab04/js06.html">js06.html</a></th>
+                            <th>คำอธิบาย</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><img src="img/js6.jpg" width="600" height="400"></td>
+                            <td class="txt">บรรทัดที่ 9 : พิมพ์ข้อความ This browser is ตามด้วย browser ที่ใช้เปิด <br>บรรทัดที่ 10 : พิมพ์ข้อความ Version ตามด้วยเวอร์ชั่นของ browser ที่ใช้เปิด<br> บรรทัดที่ 11 : parseFloat (การแปลงค่า string หรือตัวแปรให้เป็น Number)
+                                ตรวจสอบว่า navigator.appVersion มีค่ามากกว่าหรือเท่ากับ 4 หรือไม่ <br>บรรทัดที่ 12 : ถ้าใช่จะพิมพ๋พิมพ์ข้อความ You have an up-to-date browser</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">ผลรัน<br><br>
+                                <script language="JavaScript">
+                                    document.write("<br> This browser is " + navigator.appName);
+                                    document.write("<br> Version " + navigator.appVersion);
+                                    if (parseFloat(navigator.appVersion) >= 4) {
+                                        document.write("<br> You have an up-to-date browser");
+                                    }
+                                </script>
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <hr>
+                <h1 id="JS07">JS07</h1>
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th><a href="http://angsila.cs.buu.ac.th/~58160038/887371/lab04/js07.html">js07.html</a></th>
+                            <th>คำอธิบาย</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><img src="img/js7.jpg" width="600" height="400"></td>
+                            <td class="txt">บรรทัดที่ 9 : ประกาศฟังก์ชั่น windowheight()<br>บรรทัดที่ 10 : ตรวจสอบว่าเป็น browser IE หรือไม่ <br>บรรทัดที่ 11 : ถ้าใช่จะคืนค่าหน้าจอกลับมา<br> บรรทัดที่ 12 ไม่ใช่ถ้า Browser Netscape <br>บรรทัดที่ 13 : ถ้าใช่ให้คืนค่าความสูงหน้าจอกลับมา
+                                <br>บรรทัดที่ 14 : ถ้าไม่ใช่ <br>บรรทัดที่ 15 : จะคืนค่า 0 กลับมา<br>บรรทัดที่ 19 : เช็คว่าขนาดหน้าจอมากกว่าหรือเท่ากับ 300 หรือไม่ <br>บรรทัดที่ 20 : ถ้าใช่จะลิ้งไปหน้า lab04.html
+                                <br>บรรทัดที่ 21 : ถ้าไม่ใช่ <br>บรรทัดที่ 22 : จะลิ้งอยู่หน้าเดิม </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">ผลรัน<br><br>ลิ้งไปหน้านี้<br><br><img src="img/ex7.jpg" width="600" height="400">
+
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <hr>
+                <h1 id="JS08">JS08</h1>
+                <title>Image rollover</title>
+                <script language="JavaScript">
+                    function highlightdocs() {
+                        if (document.images) {
+                            document.images['docs'].src = docsOn.src;
+                        }
+                    }
+
+                    function unhighlightdocs() {
+                        document.images['docs'].src = docsOff.src;
+                    }
+                    if (document.images) {
+                        docsOn = new Image();
+                        docsOn.src = "img/doramon.png";
+                        docsOff = new Image();
+                        docsOff.src = "img/doreme.png";
+                    }
+                </script>
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th><a href="http://angsila.cs.buu.ac.th/~58160038/887371/lab04/js08.html">js08.html</a></th>
+                            <th>คำอธิบาย</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><img src="img/js8.jpg" width="600" height="400"></td>
+                            <td class="txt">บรรทัดที่ 6 : ประกาศฟังก์ชั่น highlightdocs()<br>บรรทัดที่ 7 : เช็ค document.images <br>บรรทัดที่ 8 : ให้ document.images ที่ชื่อ docs มีที่อยู่ที่ docsOn.src
+                                <br>บรรทัดที่ 12 : ประกาศฟังก์ชั่น unhighlightdocs()<br>บรรทัดที่ 13 : ให้ document.images ที่ชื่อ docs มีที่อยู่ที่ docsOff.src<br>บรรทัดที่ 15 : เช็ค document.images
+                                <br>บรรทัดที่ 16 : สร้างตัวแปร docsOn เป็น new Image<br>บรรทัดที่ 17 : ให้ docsOn.src อยู่ที่ img/doramon.png<br>บรรทัดที่ 18 : สร้างตัวแปร docsOff เป็น new images
+                                <br>บรรทัดที่ 19 : ให้ docsOff.src อยู่ที่ img/doreme.png</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">ผลรัน<br><br>
+                                <a href="http://www.google.com" onMouseOver="highlightdocs()" onMouseOut="unhighlightdocs()">
+                                    <img src="img/doreme.png" name="docs" height="25" width="25" border="0">
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <hr>
+                <h1 id="JS09">JS09</h1>
+                <script language="JavaScript">
+                    function doMoveBrowser(form) {
+                        parent.location.href = form.list.options[getSelectedValue()].value;
+                    }
+
+                    function getSelectedValue() {
+                        return document.form1.list.selectedIndex;
+                    }
+
+                    function showURL(form) {
+                        form.TextBox.value = form.list.options[getSelectedValue()].value;
+                    }
+                </script>
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th><a href="http://angsila.cs.buu.ac.th/~58160038/887371/lab04/js09.html">js09.html</a></th>
+                            <th>คำอธิบาย</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><img src="img/js9.jpg" width="600" height="400"></td>
+                            <td class="txt">บรรทัดที่ 5 : ประกาศฟังก์ชั่น doMoveBrowser() โดยรับ form เข้ามา<br>บรรทัดที่ 6 : รับค่าลิ้งค์เว็บไซต์จากฟังก์ชัน getSelectedValue<br>บรรทัดที่ 9 : ประกาศฟังก์ชั่น getSelectedValue() แล้วลิ้งไป
+                                <br> บรรทัดที่ 10 : คืนค่าเว็บไซต์กลับ <br>บรรทัดที่ 12 : ประกาศฟังก์ชั่น showURL() รับค่า form เข้ามา <br>บรรทัดที่ 13 : รับค่าลิ้งค์เว็บไซต์จากฟังก์ชัน getSelectedValue() มาเก็บไว้ใน Text box</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">ผลรัน<br><br>
+                                <form name=form1>
+                                    <select name=list onChange=showURL(this.form)>
+                <option selected value="0">Where do you want to go today?
+                <option value="http://www.google.com">Google
+                <option value="http://www.buu.ac.th">Buu University
+                <option value="http://www.informatics.buu.ac.th">Faculty of Informatics
+            </select>
+                                    <input type="button" Value="Go" onClick="doMoveBrowser(this.form)">
+                                    <input type="reset" value="Reset">
+                                    <input type="text" name="TextBox" size="40">
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <hr>
+                <h1 id="JS10">JS10</h1>
+
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th><a href="http://angsila.cs.buu.ac.th/~58160038/887371/lab04/js10.html">js10.html</a></th>
+                            <th>คำอธิบาย</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><img src="img/js10.jpg" width="600" height="400"></td>
+                            <td class="txt">บรรทัดที่ 7 : สร้างตัวแปร AR เพื่อเก็บค่า Array<br>บรรทัดที่ 8 : ให้ AR[0] เก็บข้อความ Hello <br>บรรทัดที่ 9 : ให้ AR[1] เก็บข้อความ See you<br>บรรทัดที่ 10 : ให้ AR[2] เก็บข้อความ Bye
+                                <br>บรรทัดที่ 11 : สร้างตัวแปร i=0<br>บรรทัดที่ 13 : ประกาศฟังก์ชั่น next()<br>บรรทัดที่ 14 : ให้ i เพิ่มขึ้นที่ละ 1 และหารเอาเศษกับความยาวของ AR<br>บรรทัดที่ 15 : นำข้อมูลใน AR มาแทรกลงตามค่า i ที่เพิ่มขึ้น เมื่อคลิก 1
+                                ครั้ง จะเปลี่ยนข้อความ</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">ผลรัน<br><br> <img src="img/ex10.jpg" width="1000"><br><br><img src="img/ex10_1.jpg" width="1000">
+
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <hr>
+
+
             </div>
-            <div class="col-sm-2 sidenav">
-                <div class="well">
-                    <p>ADS</p>
+            <div class="row content">
+                <div class="col-sm-2 sidenav">
+                    <p><a href="#JS06">JS06</a></p>
+                    <p><a href="#JS07">JS07</a></p>
+                    <p><a href="#JS08">JS08</a></p>
+                    <p><a href="#JS09">JS09</a></p>
+                    <p><a href="#JS10">JS10</a></p><br><br>
+
+                    <iframe style="overflow:hidden;border:0;margin:0;padding:0;width:165px;height:130px;" src="http://www.clocktag.com/html5/dt233.html"></iframe>
+
                 </div>
-                <div class="well">
-                    <p>ADS</p>
-                </div>
+
             </div>
         </div>
     </div>
 
+
     <footer class="container-fluid text-center">
-        <p>Footer Text</p>
+        <p>887371 Web Programming | Faculty of Informatics | Burapha University</p>
     </footer>
 
 </body>
